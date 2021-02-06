@@ -41,7 +41,6 @@ public class Card {
 		return rank.getValue();
 	}
 
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
