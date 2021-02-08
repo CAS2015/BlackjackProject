@@ -48,7 +48,10 @@ public abstract class Person {
 		this.hand = hand;
 	}
 	
-
+	public void printHand() {
+		System.out.println(this + "\nScore: " + this.checkSoftAceScore());
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,7 +90,30 @@ public abstract class Person {
 		return builder.toString();
 	}
 	
+	public int checkSoftAceScore() {
+		List<Card> hand = this.getHand();
+		int adjustment = 10;
+		int score = this.getHandValue();
+		
+		for (Card card : hand) {
+			if(card.getValue() == 11 && checkBust(this.getHandValue()) == false) {
+				score -= adjustment;
+				if (checkBust(score)) {
+					break;
+				}
+			}
+		}
+		
+		return score;
+	}
 	
-	
-	
+	public boolean checkBust(int score) {
+		int blackjack = 21;
+		if (score > blackjack) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }
